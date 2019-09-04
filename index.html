@@ -6,7 +6,11 @@
   		color: white;
   	}
   		.card {
-  			opacity: .85;
+  			opacity: .9;
+  		}
+
+  		label {
+  			color: white;
   		}
   	</style>
 	  <meta charset="utf-8">
@@ -17,41 +21,36 @@
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
 </head>
-<body style="padding: 2px;background-image: url(https://miro.medium.com/max/658/1*vk3JKs8irKTr3gJDNRpSmg.png)">
+<body style="background-image: url(https://miro.medium.com/max/658/1*vk3JKs8irKTr3gJDNRpSmg.png)">
   	<center><h1>MQTT</h1>
   	<p>My MQTT Web App</p></center>
-  	<div class="card-deck">
-	<div class="card border-primary">
-		<h2 class="card-header bg-primary text-center py-2">
-	    	<strong style="color: white">Broker</strong>
+	<div style="float: left;width: 25%;" class="card bg-secondary border-dark">
+		<h2 class="card-header bg-dark text-center py-2">
+	    	<strong style="color: blue">Broker</strong>
 	  	</h2>
 	  	<div class="form-group card-body">
 			<label>Address: </label>
-			<input style="width: 100%; padding: 3px;" class="border border-primary" type="text" id="address-input" value="ws://broker.hivemq.com:8000/mqtt"><br><br>
-			<button style="width: 49.5%" id="btn-connect" class="btn btn-primary">Connect</button>
-			<button style="width: 49%" id="btn-disconnect" class="btn btn-primary">Disconnect</button>
+			<input style="width: 100%; padding: 3px;" class="border border-primary" type="text" id="address-input" value="wss://test.mosquitto.org:8081/mqtt"><br><br>
+			<button style="width: 49%" id="btn-connect" class="btn btn-success">Connect</button>
+			<button style="width: 49%" id="btn-disconnect" class="btn btn-warning">Disconnect</button>
 			<br><br>
 			<label>Status: </label>
 			<input type="text" class="border border-primary" style="width: 100%; padding: 3px; font-weight: bold" id="connected-btn" value="Disconnected!" readonly="">
 		</div>
-	</div>
-  	<div class="card border-primary">
-	  	<h2 class="card-header bg-primary text-center py-2">
-	    	<strong style="color: white">Subscribe</strong>
+	  	<h2 class="card-header bg-dark text-center py-2">
+	    	<strong style="color: blue">Subscribe</strong>
 	  	</h2>
 	  	<div class="form-group card-body">
 			<label>Topic: </label>
 			<input type="text" class="border border-primary" style="width: 100%; padding: 3px;" value="josephine-pn3ed" id="topicSubscribe-input"><br><br>
-		<button style="width: 49%" id="btn-subscribe" class="btn btn-primary">Subscribe</button>
-		<button style="width: 49.5%" id="btn-unsubscribe" class="btn btn-primary">Unsubscribe</button>
+		<button style="width: 49%" id="btn-subscribe" class="btn btn-success">Subscribe</button>
+		<button style="width: 49%" id="btn-unsubscribe" class="btn btn-warning">Unsubscribe</button>
 		<br><br>
 			<label>Status: </label>
 			<input type="text" class="border border-primary" style="width: 100%; padding: 3px; font-weight: bold" id="subscribed-btn" value="Unsubscribed!" readonly="">
 		</div>
-	</div>
-	<div class="card border-primary">
-	  	<h2 class="card-header bg-primary text-center py-2">
-	    	<strong style="color: white">Publish</strong>
+	  	<h2 class="card-header bg-dark text-center py-2">
+	    	<strong style="color: blue">Publish</strong>
 	  	</h2>
 	  	<div class="form-group card-body">
 			<label>Topic: </label>
@@ -59,11 +58,10 @@
 			<br><br>
 			<label>Payload: </label>
 			<input type="text" class="border border-primary" style="width: 100%; padding: 3px;" value="Hello World!" id="payload-input"><br><br>
-		<button style="width: 100%" id="btn-publish" class="btn btn-primary">Publish</button>
+		<button style="width: 100%" id="btn-publish" class="btn btn-success">Publish</button>
 		</div>
 	</div>
-	</div>
-	<div class="card border-info" style="padding: 10px; margin: 30px;" >
+	<div style="float: right;padding: 10px;width: 70%;" class="card border-info">
 		<table style="border: dotted;border-color: grey" class="table card-body" id="table">
 			<thead>
 				<tr class="bg-info">
