@@ -1,10 +1,82 @@
 <html>
 <head>
-  <title>mows</title>
+  	<title>MQTT Web App</title>
+  	<style>
+  	h1, p{
+  		color: white;
+  	}
+  		.card {
+  			opacity: .85;
+  		}
+  	</style>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
 </head>
-<body>
-  <h1>MQTT</h1>
-  <p>My MQTT Web App</p>
+<body style="padding: 2px;background-image: url(https://miro.medium.com/max/658/1*vk3JKs8irKTr3gJDNRpSmg.png)">
+  	<center><h1>MQTT</h1>
+  	<p>My MQTT Web App</p></center>
+  	<div class="card-deck">
+	<div class="card border-primary">
+		<h2 class="card-header bg-primary text-center py-2">
+	    	<strong style="color: white">Broker</strong>
+	  	</h2>
+	  	<div class="form-group card-body">
+			<label>Address: </label>
+			<input style="width: 100%; padding: 3px;" class="border border-primary" type="text" id="address-input" value="ws://broker.hivemq.com:8000/mqtt"><br><br>
+			<button style="width: 49.5%" id="btn-connect" class="btn btn-primary">Connect</button>
+			<button style="width: 49%" id="btn-disconnect" class="btn btn-primary">Disconnect</button>
+			<br><br>
+			<label>Status: </label>
+			<input type="text" class="border border-primary" style="width: 100%; padding: 3px; font-weight: bold" id="connected-btn" value="Disconnected!" readonly="">
+		</div>
+	</div>
+  	<div class="card border-primary">
+	  	<h2 class="card-header bg-primary text-center py-2">
+	    	<strong style="color: white">Subscribe</strong>
+	  	</h2>
+	  	<div class="form-group card-body">
+			<label>Topic: </label>
+			<input type="text" class="border border-primary" style="width: 100%; padding: 3px;" value="josephine-pn3ed" id="topicSubscribe-input"><br><br>
+		<button style="width: 49%" id="btn-subscribe" class="btn btn-primary">Subscribe</button>
+		<button style="width: 49.5%" id="btn-unsubscribe" class="btn btn-primary">Unsubscribe</button>
+		<br><br>
+			<label>Status: </label>
+			<input type="text" class="border border-primary" style="width: 100%; padding: 3px; font-weight: bold" id="subscribed-btn" value="Unsubscribed!" readonly="">
+		</div>
+	</div>
+	<div class="card border-primary">
+	  	<h2 class="card-header bg-primary text-center py-2">
+	    	<strong style="color: white">Publish</strong>
+	  	</h2>
+	  	<div class="form-group card-body">
+			<label>Topic: </label>
+			<input type="text" class="border border-primary" style="width: 100%; padding: 3px;" value="josephine-pn3ed" id="topicPublish-input">
+			<br><br>
+			<label>Payload: </label>
+			<input type="text" class="border border-primary" style="width: 100%; padding: 3px;" value="Hello World!" id="payload-input"><br><br>
+		<button style="width: 100%" id="btn-publish" class="btn btn-primary">Publish</button>
+		</div>
+	</div>
+	</div>
+	<div class="card border-info" style="padding: 10px; margin: 30px;" >
+		<table style="border: dotted;border-color: grey" class="table card-body" id="table">
+			<thead>
+				<tr class="bg-info">
+					<th>Topic</th>
+					<th>Payload</th>
+					<th>Time Stamp</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<button style="width: 100%;" class="btn btn-danger card-body" id="btn-clear"><strong style="font-size: 20px;">Clear History</strong></button>
+	</div>
 </body>
 <script src="scripts/browserMqtt.js"></script>
 <script src="scripts/controller.js"></script>
