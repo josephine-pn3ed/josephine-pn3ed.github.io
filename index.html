@@ -2,16 +2,47 @@
 <head>
   	<title>MQTT Web App</title>
   	<style>
-  	h1, p{
+  	strong {
   		color: white;
+  		font-family: serif;
+  		font-size: 20px;
   	}
-  		.card {
-  			opacity: .9;
-  		}
+  	h1, p{
+  		color: black;
+  	}
 
-  		label {
-  			color: white;
-  		}
+  	label {
+  		color: white;
+  		font-size: 15px;
+  	}
+  	button.btn-success {
+  		font-size: 12px;
+  		width: 49%;
+  		font-family: monospace;
+  	}
+  	button.btn-warning {
+  		font-size: 12px;
+  		width: 49%;
+  		font-family: monospace;
+  	}
+  	table {
+  		 border: dotted;
+  		 border-color: gray;
+  		 font-size: 15px;
+  	}
+  	input.border {
+  		width: 100%;
+  		font-size: 12px;
+	  border-radius: 4px;
+	  background-color: #f8f8f8;
+	  border: 2px solid #ccc;
+  	}
+  	#connected-btn, #subscribed-btn {
+  		color: red;
+  	}
+  	img { width: 50px; height: 50px; }
+  	img.mos { width: 500px; height: 100px;}
+  	#upper { padding: 15px;}
   	</style>
 	  <meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,48 +52,63 @@
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
 </head>
-<body style="background-image: url(https://miro.medium.com/max/658/1*vk3JKs8irKTr3gJDNRpSmg.png)">
-  	<center><h1>MQTT</h1>
-  	<p>My MQTT Web App</p></center>
+<body>
+  	<div id="upper" class="text-center"><img class="mos" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToeGXv1H5RREZ5dh3IWbzCChelhzHibjKUnW5-uUD2wMWajSWl"><img class="mos" src="https://www.elementzonline.com/image/cache/catalog/Blog_images/mosquitto-600x315.png"></div>
 	<div style="float: left;width: 25%;" class="card bg-secondary border-dark">
 		<h2 class="card-header bg-dark text-center py-2">
-	    	<strong style="color: blue">Broker</strong>
+	    	<strong>Broker</strong>
 	  	</h2>
 	  	<div class="form-group card-body">
-			<label>Address: </label>
-			<input style="width: 100%; padding: 3px;" class="border border-primary" type="text" id="address-input" value="wss://test.mosquitto.org:8081/mqtt"><br><br>
-			<button style="width: 49%" id="btn-connect" class="btn btn-success">Connect</button>
+	  		<div class="row">
+				<div class="control-label col-sm-3"><label>Address: </label></div>
+				<input class="border border-primary col-sm-8" type="text" id="address-input" value="wss://test.mosquitto.org:8081/mqtt">
+			</div>
+			<br>
+			<button id="btn-connect" class="btn btn-success">Connect</button>
 			<button style="width: 49%" id="btn-disconnect" class="btn btn-warning">Disconnect</button>
-			<br><br>
-			<label>Status: </label>
-			<input type="text" class="border border-primary" style="width: 100%; padding: 3px; font-weight: bold" id="connected-btn" value="Disconnected!" readonly="">
+			<br>
+			<br>
+	  		<div class="row">
+				<div class="control-label col-sm-3"><label>Status: </label></div>
+				<input type="text" class="border border-primary col-sm-8" id="connected-btn" value="Disconnected!" readonly="">
+			</div>
 		</div>
 	  	<h2 class="card-header bg-dark text-center py-2">
-	    	<strong style="color: blue">Subscribe</strong>
+	    	<strong>Subscribe</strong>
 	  	</h2>
 	  	<div class="form-group card-body">
-			<label>Topic: </label>
-			<input type="text" class="border border-primary" style="width: 100%; padding: 3px;" value="josephine-pn3ed" id="topicSubscribe-input"><br><br>
+	  		<div class="row">
+				<div class="control-label col-sm-3"><label>Topic: </label></div>
+				<input class="border border-primary col-sm-8" type="text" value="josephine-pn3ed" id="topicSubscribe-input">
+			</div>
+			<br>
 		<button style="width: 49%" id="btn-subscribe" class="btn btn-success">Subscribe</button>
 		<button style="width: 49%" id="btn-unsubscribe" class="btn btn-warning">Unsubscribe</button>
 		<br><br>
-			<label>Status: </label>
-			<input type="text" class="border border-primary" style="width: 100%; padding: 3px; font-weight: bold" id="subscribed-btn" value="Unsubscribed!" readonly="">
+	  		<div class="row">
+				<div class="control-label col-sm-3"><label>Status: </label></div>
+				<input type="text" class="border border-primary col-sm-8" id="subscribed-btn" value="Unsubscribed!" readonly="">
+			</div>
 		</div>
 	  	<h2 class="card-header bg-dark text-center py-2">
-	    	<strong style="color: blue">Publish</strong>
+	    	<strong>Publish</strong>
 	  	</h2>
 	  	<div class="form-group card-body">
-			<label>Topic: </label>
-			<input type="text" class="border border-primary" style="width: 100%; padding: 3px;" value="josephine-pn3ed" id="topicPublish-input">
-			<br><br>
-			<label>Payload: </label>
-			<input type="text" class="border border-primary" style="width: 100%; padding: 3px;" value="Hello World!" id="payload-input"><br><br>
+	  		<div class="row">
+				<div class="control-label col-sm-3"><label>Topic: </label></div>
+				<input type="text" class="border border-primary col-sm-8" value="josephine-pn3ed" id="topicPublish-input">
+			</div>
+			<br>
+	  		<div class="row">
+				<div class="control-label col-sm-3"><label>Payload: </label></div>
+				<input type="text" class="border border-primary col-sm-8" value="Hello World!" id="payload-input">
+			</div>
+			<br>
 		<button style="width: 100%" id="btn-publish" class="btn btn-success">Publish</button>
 		</div>
 	</div>
-	<div style="float: right;padding: 10px;width: 70%;" class="card border-info">
-		<table style="border: dotted;border-color: grey" class="table card-body" id="table">
+	<div style="float: right;padding: 10px;width: 72%;" class="card border-info">
+		<table class="table card-body" id="table">
 			<thead>
 				<tr class="bg-info">
 					<th>Topic</th>
@@ -73,7 +119,7 @@
 			<tbody>
 			</tbody>
 		</table>
-		<button style="width: 100%;" class="btn btn-danger card-body" id="btn-clear"><strong style="font-size: 20px;">Clear History</strong></button>
+		<button class="btn card-body" id="btn-clear"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDEajVpmi2WETyZFT0OJyYgxlRHs_vrXOe9e5s1PrYeGtHi3Hc"></button>
 	</div>
 </body>
 <script src="scripts/browserMqtt.js"></script>
